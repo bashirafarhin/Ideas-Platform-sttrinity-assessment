@@ -18,7 +18,7 @@ For detailed API documentation, including request/response formats and examples,
 1. Clone the repository
 ```
 git clone https://github.com/bashirafarhin/Ideas-Platform-sttrinity-assessment.git
-cd project
+cd ./Ideas-Platform-sttrinity-assessment
 ```
 
 2. Ensure Docker is installed and running
