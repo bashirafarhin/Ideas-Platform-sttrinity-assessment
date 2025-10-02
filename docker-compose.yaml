@@ -1,0 +1,61 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: local-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: mydb
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: project-pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: admin123
+    ports:
+      - "8080:80"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  server:
+    build: ./server
+    container_name: project-server
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      PORT: 8000
+      FRONTEND_URL: http://localhost:3000
+      DATABASE_URL: postgresql://admin:admin123@postgres:5432/mydb
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  client:
+    build: ./client
+    container_name: project-client
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_URL: http://server:8000/api
+    depends_on:
+      - server
+
+volumes:
+  pgdata:
