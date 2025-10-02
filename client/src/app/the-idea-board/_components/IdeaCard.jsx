@@ -3,13 +3,27 @@ import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { upvoteIdea } from "../../../redux/IdeasSlice";
 import { HeartPlus } from "lucide-react";
+import { useState } from "react";
 
 const IdeaCard = ({ id, text, upvotes, created_at }) => {
   const dispatch = useDispatch();
 
-  const handleUpvote = useCallback(() => {
+  const [animate, setAnimate] = useState(false);
+
+    const handleUpvote = useCallback(() => {
     dispatch(upvoteIdea(id));
   }, [dispatch, id]);
+
+  const handleClick = useCallback(() => {
+    handleUpvote();
+    setAnimate(true);
+
+    const timer = setTimeout(() => {
+      setAnimate(false);
+    }, 1000);
+    // cleanup if component unmounts before 1s
+    return () => clearTimeout(timer);
+  }, [handleUpvote]);
 
   return (
 <div
@@ -32,12 +46,25 @@ const IdeaCard = ({ id, text, upvotes, created_at }) => {
     <p className="text-white/80 text-sm">
       Created at: {new Date(created_at).toLocaleString()}
     </p>
-    <button
+    {/* <button
       onClick={handleUpvote}
       className="text-white px-3 py-1 rounded hover:scale-110 transition-all duration-200 flex gap-1 cursor-pointer"
       aria-label={`Upvote idea: ${text}`}
     >
       <HeartPlus /> {upvotes}
+    </button> */}
+     <button
+      onClick={handleClick}
+      className="text-white px-3 py-1 rounded hover:scale-110 transition-all duration-200 flex gap-1 cursor-pointer"
+      aria-label={`Upvote idea: ${text}`}
+    >
+      <HeartPlus
+        className={`transition-colors duration-1000 ease-in-out ${
+          animate ? "text-red-500" : "text-white"
+        }`}
+        fill={animate ? "red" : "none"}
+      />
+      {upvotes}
     </button>
   </div>
 </div>

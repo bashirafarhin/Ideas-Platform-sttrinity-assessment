@@ -35,18 +35,7 @@ const IdeaContainer = () => {
     dispatch(fetchIdeas({ pageNumber, pageSize }));
   }, [dispatch, pageNumber, pageSize]);
 
-  // const handleSubmit = useCallback(() => {
-  //    if (validateIdea()) {
-  //     setError(validateIdea());
-  //     return;
-  //   }
-
-  //   if (newIdea.trim()) {
-  //     dispatch(addIdea(newIdea));
-  //     setNewIdea("");
-  //   }
-  // }, [dispatch, newIdea]);
-   const handleSubmit = useCallback(
+  const handleSubmit = useCallback(
     (e) => {
       e.preventDefault(); // ✅ prevent default form submit
       if (!validateIdea()) return;
@@ -116,8 +105,6 @@ const IdeaContainer = () => {
   )}
 </form>
 
-
-
       {/* Ideas List */}
       {loading ? (
         <p className="text-gray-500">Loading ideas...</p>
@@ -129,9 +116,9 @@ const IdeaContainer = () => {
       ) : (
         <div className="w-full grid gap-6 
                 grid-cols-1 
-                sm:grid-cols-2 
+                sm:grid-cols-2
                 md:grid-cols-3 
-                lg:grid-cols-4">
+                lg:grid-cols-3">
     {items.map((idea) => (
       <IdeaCard
         key={idea.id}

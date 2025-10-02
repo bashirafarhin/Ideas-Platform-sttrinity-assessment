@@ -6,7 +6,7 @@ export default function HeroSection() {
 
   return (
     <section 
-      className="w-full max-w-[96%] mx-auto bg-blue-600 rounded-md py-16 px-6 md:py-24 md:px-12 my-10"
+      className="w-full max-w-[95%] mx-auto bg-blue-600 rounded-md py-16 px-6 md:py-24 md:px-12 my-10"
       aria-labelledby="hero-heading"
       aria-describedby="hero-description"
     >
