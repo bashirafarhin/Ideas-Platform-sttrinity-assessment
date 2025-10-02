@@ -45,13 +45,14 @@ services:
         condition: service_healthy
 
   client:
-    build: ./client
+    build:
+     context: ./client
+     args:
+      NEXT_PUBLIC_API_URL: http://server:8000/api
     container_name: project-client
     restart: always
     ports:
       - "3000:3000"
-    environment:
-      NEXT_PUBLIC_API_URL: http://server:8000/api
     depends_on:
       - server
 
