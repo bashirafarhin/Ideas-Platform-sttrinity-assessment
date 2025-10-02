@@ -23,8 +23,8 @@ export async function getIdeas(req, res, next) {
 export async function createIdea(req, res, next) {
   try {
     const { text } = req.body;
-    if (!text || text.length > 300) {
-      return res.status(400).json({ success: false, message: "Idea text is required and must be under 300 chars" });
+    if (!text || text.length > 280) {
+      return res.status(400).json({ success: false, message: "Idea text is required and must be under 280 chars" });
     }
     const idea = await ideasService.addIdea(text);
     res.status(201).json({ success: true, data: idea });

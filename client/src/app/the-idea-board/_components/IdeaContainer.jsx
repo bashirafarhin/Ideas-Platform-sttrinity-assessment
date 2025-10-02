@@ -18,8 +18,8 @@ const IdeaContainer = () => {
 
     if (!newIdea.trim()) {
       newErrors.newIdea = "Idea cannot be empty.";
-    } else if (newIdea.length > 300) {
-      newErrors.newIdea = "Idea cannot exceed 300 characters.";
+    } else if (newIdea.length > 280) {
+      newErrors.newIdea = "Idea cannot exceed 280 characters.";
     } else {
       newErrors.newIdea = ""; // no error
     }

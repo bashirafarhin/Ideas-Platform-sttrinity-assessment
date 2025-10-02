@@ -80,7 +80,7 @@ Add a new idea to the platform.
 ```json
 {
   "success": false,
-  "message": "Idea text is required and must be under 300 chars"
+  "message": "Idea text is required and must be under 280 chars"
 }
 ```
 
