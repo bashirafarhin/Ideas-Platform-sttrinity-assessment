@@ -48,7 +48,7 @@ services:
     build:
      context: ./client
      args:
-      NEXT_PUBLIC_API_URL: http://server:8000/api
+      NEXT_PUBLIC_API_URL: http://localhost:8000/api
     container_name: project-client
     restart: always
     ports:
